@@ -61,10 +61,18 @@ if ($slug) {
         body { background: #020617; color: #f8fafc; font-family: sans-serif; }
         .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(59, 130, 246, 0.2); }
         .blue-glow { box-shadow: 0 0 30px rgba(37, 99, 235, 0.2); }
+        .green-glow {
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.45);
+            border-color: #22c55e !important;
+        }
+
         .accent-blue { background: #2563eb; }
         .accent-blue:hover { background: #1d4ed8; }
         .input-box { background: #0f172a; border: 1px solid #1e293b; color: white; transition: 0.2s; }
         .input-box:focus { border-color: #3b82f6; outline: none; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2); }
+        <div class="glass p-6 rounded-3xl blue-glow click-glow"
+     onclick="activateBox(this)">
+
     </style>
 </head>
 <body class="min-h-screen p-4 md:p-10 flex flex-col items-center">
@@ -199,7 +207,14 @@ if ($slug) {
                     `;
                 });
             }
+            function activateBox(el) {
+        document.querySelectorAll('.click-glow').forEach(b => {
+            b.classList.remove('green-glow');
+        });
+        el.classList.add('green-glow');
+    }
             loadBundles();
+            
         </script>
     <?php endif; ?>
 </body>
