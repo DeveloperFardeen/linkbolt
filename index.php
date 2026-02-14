@@ -4,14 +4,19 @@ require 'pdo.php';
 // Check if viewing a bundle
 $slug = $_GET['s'] ?? null;
 if ($slug) {
-    $stmt = $pdo->prepare("SELECT b.bundle_name, l.link_title, l.destination_url 
-                           FROM bundles b 
-                           JOIN bundle_links l ON b.id = l.bundle_id 
-                           WHERE b.slug = ?");
+    $stmt = $pdo->prepare("
+        SELECT b.bundle_name, l.link_title,
+    l.destination_url 
+            FROM bundles b 
+            JOIN bundle_links l ON b.id = l.bundle_id 
+            WHERE b.slug = ?
+        ");
     $stmt->execute([$slug]);
     $bundle_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    if (!$bundle_data) { $error = "Bundle not found."; }
+    if (!$bundle_data) {
+        $error = "Bundle not found."; 
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -22,7 +27,8 @@ if ($slug) {
     <title>LinkBolt | Bundle Your World</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="../images/favicon.png">
+    <link rel="icon" type="image/png" href="../images/
+    favicon.png">
     <style>
         body { background: #020617; color: #f8fafc; font-family: sans-serif; }
         .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(59, 130, 246, 0.2); }
