@@ -23,7 +23,9 @@ if ($slug) {
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="../images/favicon.png">
-    <style>    body { background: #020617; color: #f8fafc; font-family: sans-serif; transition: 0.3s; }
+    <style>    body { background: linear-gradient(135deg,#020617,#0f172a,#1e293b);color:#f8fafc;
+                    font-family:'poppins',sans-serif;
+                    transition : 0.3s;}
 
     body.light {
         background: #f8fafc;
@@ -103,7 +105,7 @@ if ($slug) {
 
                 <div class="flex items-center gap-3">
         <div id="user-tag" class="text-[10px] uppercase tracking-widest bg-slate-800 px-3 py-1 rounded text-slate-400"></div>
-        <button onclick="toggleTheme()" class="theme-btn" id="theme-btn">🌙 Dark</button>
+        <button onclick="toggleTheme()" class="theme-btn" id="theme-btn">🌙 modern blue</button>
     </div>
             </header>
 
