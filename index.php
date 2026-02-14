@@ -111,7 +111,7 @@ if ($slug) {
                 <!-- Creator Panel -->
                 <div class="glass p-6 rounded-3xl blue-glow">
                     <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
-                        <span class="w-2 h-6 accent-blue rounded-full"></span>  Add New Bundle
+                        <span class="w-2 h-6 accent-blue rounded-full"></span>  Add New Profile
                     </h2>
                     <div class="space-y-4">
                         <input type="text" id="b-name" placeholder="Bundle Name (e.g. My Socials)" class="w-full p-3 rounded-xl input-box">
@@ -129,7 +129,7 @@ if ($slug) {
                         </div>
 
                         <button onclick="createBundle()" class="w-full accent-red p-4 rounded-xl font-bold text-white mt-4 shadow-lg active:scale-95 transition-all">
-                            CREATE BOLT LINK
+                            Generate BOLT LINK
                         </button>
                     </div>
                 </div>
