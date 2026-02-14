@@ -20,6 +20,28 @@ if ($slug) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LinkBolt | Bundle Your World</title>
+    <style>
+        .light-mode {
+    background: #f8fafc !important;
+    color: #0f172a !important;
+}
+
+.light-mode .glass {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+.light-mode .input-box {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #0f172a !important;
+}
+
+.light-mode .text-slate-400 {
+    color: #475569 !important;
+}
+
+    </style>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="../images/favicon.png">
@@ -33,7 +55,8 @@ if ($slug) {
         .input-box:focus { border-color: #3b82f6; outline: none; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2); }
     </style>
 </head>
-<body class="min-h-screen p-4 md:p-10 flex flex-col items-center">
+<body id="main-body" class="min-h-screen p-4 md:p-10 flex flex-col items-center">
+
 
     <?php if ($slug): ?>
         <!-- VIEWING A BUNDLE -->
@@ -65,7 +88,14 @@ if ($slug) {
         <div class="max-w-2xl w-full">
             <header class="flex justify-between items-center mb-12">
                 <div class="text-3xl font-black italic tracking-tighter text-blue-500">LINK<span class="text-white">BOLT (LINK BUNDELER)</span></div>
-                <div id="user-tag" class="text-[10px] uppercase tracking-widest bg-slate-800 px-3 py-1 rounded text-slate-400"></div>
+                <div class="flex items-center gap-3">
+    <button onclick="toggleTheme()" 
+        class="text-xs px-3 py-1 rounded bg-slate-700 text-white hover:bg-slate-600 transition">
+        🌙 Mode
+    </button>
+    <div id="user-tag" class="text-[10px] uppercase tracking-widest bg-slate-800 px-3 py-1 rounded text-slate-400"></div>
+</div>
+
             </header>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -160,7 +190,28 @@ if ($slug) {
                     `;
                 });
             }
-            loadBundles();
+            function toggleTheme() {
+    const body = document.getElementById("main-body");
+    body.classList.toggle("light-mode");
+
+    // Save preference
+    if(body.classList.contains("light-mode")) {
+        localStorage.setItem("theme", "light");
+    } else {
+        localStorage.setItem("theme", "dark");
+    }
+}
+
+// Load saved theme
+window.onload = function() {
+    loadBundles();
+
+    const savedTheme = localStorage.getItem("theme");
+    if(savedTheme === "light") {
+        document.getElementById("main-body").classList.add("light-mode");
+    }
+};
+
         </script>
     <?php endif; ?>
 </body>
