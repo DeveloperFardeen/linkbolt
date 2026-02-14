@@ -24,6 +24,20 @@ if ($slug) {
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="../images/favicon.png">
     <style>
+       
+          .marquee {
+            white-space: nowrap;
+            animation: slide 12s linear infinite;
+            background: linear-gradient(90deg, #22d3ee, #a78bfa, #f472b6, #22d3ee);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+          }
+          @keyframes slide {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+          }
+
         body { background: #020617; color: #f8fafc; font-family: sans-serif; }
         .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(59, 130, 246, 0.2); }
         .blue-glow { box-shadow: 0 0 30px rgba(37, 99, 235, 0.2); }
@@ -34,6 +48,11 @@ if ($slug) {
     </style>
 </head>
 <body class="min-h-screen p-4 md:p-10 flex flex-col items-center">
+    <div class="w-full mb-6 overflow-hidden">
+  <div class="marquee font-extrabold text-center text-xl md:text-2xl py-2">
+    <span>✨ Welcome to our LinkBolt ✨</span>
+  </div>
+</div>
 
     <?php if ($slug): ?>
         <!-- VIEWING A BUNDLE -->
