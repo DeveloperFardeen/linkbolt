@@ -30,6 +30,43 @@ if ($slug) {
     <link rel="icon" type="image/png" href="../images/
     favicon.png">
     <style>
+        <style>
+    body { background: #020617; color: #f8fafc; font-family: sans-serif; transition: 0.3s; }
+
+    body.light {
+        background: #f8fafc;
+        color: #020617;
+    }
+
+    body.light .glass {
+        background: rgba(226, 232, 240, 0.8);
+        border: 1px solid rgba(59, 130, 246, 0.2);
+    }
+
+    body.light .input-box {
+        background: #ffffff;
+        color: #020617;
+        border: 1px solid #cbd5f5;
+    }
+
+    body.light .input-box::placeholder {
+        color: #64748b;
+    }
+
+    .theme-btn {
+        cursor: pointer;
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+        background: #1e293b;
+        color: #f8fafc;
+    }
+
+    body.light .theme-btn {
+        background: #e2e8f0;
+        color: #020617;
+    }
+</style>
         body { background: #020617; color: #f8fafc; font-family: sans-serif; }
         .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(59, 130, 246, 0.2); }
         .blue-glow { box-shadow: 0 0 30px rgba(37, 99, 235, 0.2); }
@@ -70,15 +107,20 @@ if ($slug) {
         <!-- DASHBOARD -->
         <div class="max-w-2xl w-full">
             <header class="flex justify-between items-center mb-12">
-                <div class="text-3xl font-black italic tracking-tighter text-blue-500">LINK<span class="text-white">BOLT</span></div>
+                <div class="text-3xl font-black italic tracking-tighter text-blue-500">LINK<span class="text-white">BOLT (LINK BUNDELER)</span></div>
                 <div id="user-tag" class="text-[10px] uppercase tracking-widest bg-slate-800 px-3 py-1 rounded text-slate-400"></div>
+
+                <div class="flex items-center gap-3">
+        <div id="user-tag" class="text-[10px] uppercase tracking-widest bg-slate-800 px-3 py-1 rounded text-slate-400"></div>
+        <button onclick="toggleTheme()" class="theme-btn" id="theme-btn">🌙 Dark</button>
+    </div>
             </header>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Creator Panel -->
                 <div class="glass p-6 rounded-3xl blue-glow">
                     <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
-                        <span class="w-2 h-6 accent-blue rounded-full"></span> New Bundle
+                        <span class="w-2 h-6 accent-blue rounded-full"></span>  Add New Bundle
                     </h2>
                     <div class="space-y-4">
                         <input type="text" id="b-name" placeholder="Bundle Name (e.g. My Socials)" class="w-full p-3 rounded-xl input-box">
@@ -95,7 +137,7 @@ if ($slug) {
                             <button onclick="addLinkField()" class="text-xs text-blue-400 hover:text-blue-300">+ Add Another URL</button>
                         </div>
 
-                        <button onclick="createBundle()" class="w-full accent-blue p-4 rounded-xl font-bold text-white mt-4 shadow-lg active:scale-95 transition-all">
+                        <button onclick="createBundle()" class="w-full accent-red p-4 rounded-xl font-bold text-white mt-4 shadow-lg active:scale-95 transition-all">
                             CREATE BOLT LINK
                         </button>
                     </div>
@@ -103,8 +145,9 @@ if ($slug) {
 
                 <!-- History Panel -->
                 <div>
-                    <h2 class="text-xl font-bold mb-4 text-slate-400">Your Active Bolts</h2>
+                    <h2 class="text-xl font-bold mb-4 text-slate-400">List of Your Active Bolts</h2>
                     <div id="my-bundles" class="space-y-4">
+                        
                         <!-- Loaded via JS -->
                     </div>
                 </div>
