@@ -201,28 +201,28 @@ if ($slug) {
             }
             loadBundles();
 
-            function toggleTheme() {
-    const body = document.body;
-    const btn = document.getElementById("theme-btn");
+           function toggleTheme() {
+                const body = document.body;
+                const btn = document.getElementById("theme-btn");
 
-    body.classList.toggle("light");
+                body.classList.toggle("light");
 
-    if(body.classList.contains("light")) {
-        btn.innerText = "☀ Light";
-        localStorage.setItem("lb_theme", "light");
-    } else {
-        btn.innerText = "🌙 Dark";
-        localStorage.setItem("lb_theme", "dark");
-    }
-}
+                if(body.classList.contains("light")) {
+                    btn.innerText = "☀ Light";
+                    localStorage.setItem("lb_theme", "light");
+                } else {
+                        btn.innerText = "🌙 Dark";
+                    localStorage.setItem("lb_theme", "dark");
+                }
+            }
 
-// Apply saved theme on load
-const savedTheme = localStorage.getItem("lb_theme");
-
-if(savedTheme === "light") {
-    document.body.classList.add("light");
-    document.getElementById("theme-btn").innerText = "☀ Light";
-}
+            // Apply saved theme on load
+            const savedTheme = localStorage.getItem("lb_theme");
+            
+            if(savedTheme === "light") {
+                document.body.classList.add("light");
+                document.getElementById("theme-btn").innerText = "☀ Light";
+            }
 
         </script>
     <?php endif; ?>
