@@ -98,12 +98,12 @@ if ($slug) {
         <!-- DASHBOARD -->
         <div class="max-w-2xl w-full">
             <header class="flex justify-between items-center mb-12">
-                <div class="text-3xl font-black italic tracking-tighter text-blue-500">LINK<span class="text-white">BOLT (LINK BUNDELER)</span></div>
+                <div class="text-3xl font-black italic tracking-tighter text-blue-500">LINK<span class="text-black">BOLT (LINK BUNDELER)</span></div>
                 <div id="user-tag" class="text-[10px] uppercase tracking-widest bg-slate-800 px-3 py-1 rounded text-slate-400"></div>
 
                 <div class="flex items-center gap-3">
         <div id="user-tag" class="text-[10px] uppercase tracking-widest bg-slate-800 px-3 py-1 rounded text-slate-400"></div>
-        <button onclick="toggleTheme()" class="theme-btn" id="theme-btn">🌙 Dark</button>
+        <button onclick="toggleTheme()" class="theme-btn" id="theme-btn">🌙 white</button>
     </div>
             </header>
 
