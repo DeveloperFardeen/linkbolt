@@ -38,4 +38,20 @@ if ($action === 'list') {
                            FROM bundles b WHERE b.user_id = ? ORDER BY b.created_at DESC");
     $stmt->execute([$uid]);
     echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+    if ($action === 'toggle_pin') {
+    $bundleId = $_GET['bundle_id'] ?? '';
+
+    if (empty($bundleId)) {
+        echo json_encode(['success' => false, 'error' => 'Bundle ID required']);
+        exit;
+    }
+
+    $stmt = $pdo->prepare("UPDATE bundles 
+                           SET is_pinned = IF(is_pinned=1, 0, 1) 
+                           WHERE id = ?");
+    $stmt->execute([$bundleId]);
+
+    echo json_encode(['success' => true]);
+}
+
 }
