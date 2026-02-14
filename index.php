@@ -70,8 +70,7 @@ if ($slug) {
         .accent-blue:hover { background: #1d4ed8; }
         .input-box { background: #0f172a; border: 1px solid #1e293b; color: white; transition: 0.2s; }
         .input-box:focus { border-color: #3b82f6; outline: none; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2); }
-        <div class="glass p-6 rounded-3xl blue-glow click-glow"
-     onclick="activateBox(this)">
+        
 
     </style>
 </head>
@@ -117,7 +116,8 @@ if ($slug) {
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Creator Panel -->
-                <div class="glass p-6 rounded-3xl blue-glow">
+                <div class="glass p-6 rounded-3xl blue-glow click-glow"
+                 onclick="activateBox(this)">
                     <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
                         <span class="w-2 h-6 accent-blue rounded-full"></span>  Add New Bundle
                     </h2>
