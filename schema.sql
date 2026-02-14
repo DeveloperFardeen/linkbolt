@@ -25,3 +25,10 @@ CREATE TABLE bundle_links (
     FOREIGN KEY (bundle_id) REFERENCES bundles(id) ON DELETE CASCADE,
     INDEX (bundle_id)
 );
+ CREATE TABLE bundle_views (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    bundle_id INT NOT NULL,
+    visitor_ip VARCHAR(45),
+    viewed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
