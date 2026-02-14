@@ -15,24 +15,81 @@ if ($slug) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LinkBolt | Bundle Your World</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="../images/favicon.png">
-    <style>
-        body { background: #020617; color: #f8fafc; font-family: sans-serif; }
-        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(59, 130, 246, 0.2); }
-        .blue-glow { box-shadow: 0 0 30px rgba(37, 99, 235, 0.2); }
-        .accent-blue { background: #2563eb; }
-        .accent-blue:hover { background: #1d4ed8; }
-        .input-box { background: #0f172a; border: 1px solid #1e293b; color: white; transition: 0.2s; }
-        .input-box:focus { border-color: #3b82f6; outline: none; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2); }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bolt Link Creator</title>
+
+<style>
+body{
+margin:0;
+font-family:sans-serif;
+background:linear-gradient(135deg,#141e30,#243b55);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+color:white;
+}
+
+.box{
+background:rgba(255,255,255,0.08);
+padding:25px;
+border-radius:15px;
+backdrop-filter:blur(12px);
+box-shadow:0 8px 25px rgba(0,0,0,0.4);
+width:320px;
+}
+
+h2{
+text-align:center;
+}
+
+input{
+width:100%;
+padding:10px;
+margin-top:10px;
+border-radius:8px;
+border:none;
+background:#1f2937;
+color:white;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:15px;
+border:none;
+border-radius:10px;
+background:linear-gradient(90deg,#00c6ff,#0072ff);
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+</style>
 </head>
+
+<body>
+
+<div class="box">
+<h2>🚀 New Bundle</h2>
+
+<input type="text" placeholder="Bundle Name">
+<input type="text" placeholder="Custom Slug">
+<input type="text" placeholder="Title">
+<input type="url" placeholder="URL">
+
+<button>Create Bolt Link ⚡</button>
+</div>
+
+</body>
+</html>
 <body class="min-h-screen p-4 md:p-10 flex flex-col items-center">
 
     <?php if ($slug): ?>
@@ -76,7 +133,7 @@ if ($slug) {
                     </h2>
                     <div class="space-y-4">
                         <input type="text" id="b-name" placeholder="Bundle Name (e.g. My Socials)" class="w-full p-3 rounded-xl input-box">
-                        <input type="text" id="b-slug" placeholder="custom-slug" class="w-full p-3 rounded-xl input-box">
+                        <input type="text" id="b-slug" placeholder="Create your bundle name as shown above" class="w-full p-3 rounded-xl input-box">
                         
                         <div class="pt-4 border-t border-slate-700">
                             <p class="text-xs text-slate-500 mb-2 uppercase font-bold">Add Links to this bundle</p>
@@ -138,26 +195,57 @@ if ($slug) {
                     alert(out.error || "Slug already taken or error occurred.");
                 }
             }
+function isValidURL(url) {
+    try {
+        const parsed = new URL(url);
+        return parsed.protocol === "http:" || parsed.protocol === "https:";
+    } catch (err) {
+        return false;
+    }
+}
 
-            async function loadBundles() {
-                const res = await fetch('api.php?action=list&user_id=' + userId);
-                const bundles = await res.json();
-                const container = document.getElementById('my-bundles');
+           async function createBundle() {
+    const name = document.getElementById('b-name').value.trim();
+    const slug = document.getElementById('b-slug').value.trim();
+
+    const titles = Array.from(document.querySelectorAll('.link-title-in')).map(i => i.value.trim());
+    const urls = Array.from(document.querySelectorAll('.link-url-in')).map(i => i.value.trim());
+
+    const links = [];
+
+    for (let i = 0; i < titles.length; i++) {
+        if (titles[i] && urls[i]) {
+
+            if (!isValidURL(urls[i])) {
+                alert("Invalid URL: " + urls[i] + "\nPlease enter a valid http or https link.");
+                return;
+            }
+
+            links.push({ title: titles[i], url: urls[i] });
+        }
+    }
+
+    if (links.length === 0) {
+        alert("Please add at least one valid link.");
+        return;
+    }
+
+    const res = await fetch('api.php?action=create', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_id: userId, name, slug, links })
+    });
+
+    const out = await res.json();
+
+    if (out.success) {
+        location.reload();
+    } else {
+        alert(out.error || "Error occurred.");
+    }
+}
+
                 
-                bundles.forEach(b => {
-                    const url = window.location.origin + window.location.pathname + '?s=' + b.slug;
-                    container.innerHTML += `
-                        <div class="p-4 glass rounded-2xl border-l-2 border-blue-500">
-                            <div class="flex justify-between items-start mb-2">
-                                <span class="font-bold text-lg">${b.bundle_name}</span>
-                                <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-1 rounded uppercase">${b.link_count} Links</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <input type="text" value="${url}" readonly class="w-full bg-black/30 p-2 text-xs rounded border border-white/10 text-slate-400">
-                                <button onclick="window.open('${url}')" class="text-xs bg-white text-black px-3 py-2 rounded font-bold">Open</button>
-                            </div>
-                        </div>
-                    `;
                 });
             }
             loadBundles();
