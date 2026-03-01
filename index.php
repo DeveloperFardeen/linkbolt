@@ -17,6 +17,11 @@ if ($slug) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <div class="text-4xl font-black tracking-tight 
+            bg-gradient-to-r from-blue-500 via-cyan-400 to-indigo-500 
+            bg-clip-text text-transparent">
+    LINKBOLT ⚡
+</div>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LinkBolt | Bundle Your World</title>
